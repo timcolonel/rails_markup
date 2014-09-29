@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in rails_markup.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
