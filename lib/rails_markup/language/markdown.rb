@@ -6,6 +6,9 @@ module RailsMarkup
         extension [:md, :markdown]
       end
 
+      # Autodetect markdown language
+      # Will load the default engine.
+      # Searching for Redcarpet, Github::Markdown
       def autodetect_engine
         @engine = if defined? Redcarpet
                     Redcarpet::Markdown.new(Redcarpet::Render::HTML,

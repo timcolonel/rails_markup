@@ -1,5 +1,7 @@
 module RailsMarkup
   class Handler
+    include ActionView::Helpers::TagHelper
+
     class_attribute :default_format
     self.default_format = Mime::HTML
 
@@ -11,7 +13,10 @@ module RailsMarkup
     # @return [String] Ruby code that when evaluated will return the rendered
     #   content
     def call(template)
-      "#{@language.renderer.yield(template.source).inspect}.html_safe"
+      rendered = @language.renderer.yield(@language.engine, template.source)
+      content = content_tag_string :div, rendered.html_safe, class: "markup-content #{@language.class.name.demodulize.underscore}"
+      output = content_tag_string :div, content, class: 'markup-wrapper'
+      "#{output.inspect}.html_safe"
     end
   end
 end
